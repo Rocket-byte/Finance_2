@@ -43,6 +43,7 @@ def copyargumentDay(buffer):
     month = buffer[5:7]
     day = buffer[8:10]
     wk = datetime.date(int(year), int(month), int(day)).isocalendar()[2]
+
     return wk
 
 for x in range(253):
