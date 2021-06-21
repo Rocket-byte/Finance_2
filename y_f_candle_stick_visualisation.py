@@ -3,9 +3,10 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import os
 import pandas as pd
-import psutil
-import orca
 
+
+if not os.path.exists("images"):
+    os.mkdir("images")
 
 def getTicker():
     path_tickers_name = os.path.abspath('ticker.csv')
@@ -25,6 +26,7 @@ def getStockData(stockName):
     df1.insert(0, 'StockName', len(df1))
     df1['StockName'] = stockName
     df1['DATE_TIME'] = df1.index
+
 
     fig = go.Figure(data=[go.Candlestick(x=df['DATE_TIME'],
                                          open=df['Open'], high=df['High'],
@@ -80,7 +82,7 @@ def getStockData(stockName):
 
     fig2.update_layout(title='The Great Recession', yaxis_title=f'{stockName}', yaxis2_title=f'{stockName}', xaxis_rangeslider_visible=False, xaxis2_rangeslider_visible=False, showlegend=False)
     fig2.show()
-    #fig2.write_image(r"d:\fig1.png")
+    fig2.write_image(f"images/{stockName}.png")
     return df
 
 
